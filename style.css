@@ -243,6 +243,34 @@ input[type="search"]::-webkit-search-cancel-button {
     top: 30%;
 }
 
+/* Word & Pronunciation */
+.pronunciation-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.word-pronunciation-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-100);
+}
+
+.word {
+    font: var(--text-preset-1-mono-inconsolata-bold-mobile);
+    color: var(--neutral-0);
+}
+
+.pronunciation {
+    font: var(--text-preset-4-sans-inter-regular);
+    color: var(--purple-500);
+}
+
+.pronunciation-img {
+    width: var(--spacing-600);
+    height: var(--spacing-600);
+}
+
+
 
 /* Toggle Switch */
 
