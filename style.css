@@ -241,10 +241,15 @@ input[type="search"]::-webkit-search-cancel-button {
     opacity: 25%;
 }
 
-.search-img {
+.search-button {
     position: absolute;
     left: calc(100% - 30px);
     top: 30%;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
 }
 
 /* Word & Pronunciation */
