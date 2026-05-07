@@ -14,21 +14,27 @@
     <div class="container">
       <header class="header-container">
         <div class="logo">
-          <img src="./assets/images/logo.svg" alt="">
+          <img src="./assets/images/logo.svg" alt="Dictionary logo">
         </div>
 
         <div class="right-container">
-          <div class="font-selector-container">
-            <p class="font-text">Sans Serif</p>
+          <button 
+            class="font-selector-container" 
+            type="button" 
+            aria-label="Select font" 
+            aria-expanded="false">
+            <span class="font-text">Sans Serif</span>
             <img class="font-img" src="./assets/images/icon-arrow-down.svg" alt="">
-          </div>
-
-          <div class="rectangle"></div>
+          </button>
 
           <div class="theme-selector-container">
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" id="theme-logo">
               <span class="slider"></span>
+            </label>
+
+            <label for="theme-logo" class="visually-hidden">
+              Toggle dark theme
             </label>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/></svg>
@@ -50,14 +56,78 @@
           <p class="pronunciation">/ˈkiːbɔːd/</p>
         </div>
 
-        <img src="./assets/images/icon-play.svg" alt="" class="pronunciation-img">
+        <button class="pronunciation-button" type="button">
+          <img src="./assets/images/icon-play.svg" alt=""  class="pronunciation-img">
+        </button>
       </section>
 
       <section class="noun-section">
+        <div class="partOfSpeech-container after-style">
+          <p class="partOfSpeech">
+            noun
+          </p>
+        </div>
 
+        <div class="meaning-synonyms-container">
+          <p class="meaning-text">
+            Meaning
+          </p>
+
+          <ul class="meaning">
+            <li>
+              (etc.) A set of keys used to operate a typewriter, computer etc.
+            </li>
+            <li>
+              A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.
+            </li>
+            <li>
+              A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.
+            </li>
+          </ul>
+        </div>
+
+        <div class="synonyms-container">
+          <p class="synonyms-text">
+            Synonyms
+          </p>
+
+          <p class="synonyms">
+            electronic keyboard
+          </p>
+         
+        </div>
       </section>
 
       <section class="verb-section">
+        <div class="partOfSpeech-container after-style">
+          <p class="partOfSpeech">
+            verb
+          </p>
+        </div>
+
+        <div class="verb-container after-style">
+           <p class="meaning-text">
+            Meaning
+          </p>
+
+          <ul class="meaning">
+            <li>
+              To type on a computer keyboard.
+              <p class="example-container">
+                “Keyboarding is the part of this job I hate the most.”
+              </p>
+            </li>
+            
+          </ul>
+        </div>
+
+        <div class="source-container">
+          <p class="source-text">
+            Source
+          </p>
+
+          <a href="#" class="source-link">https://en.wiktionary.org/wiki/keyboard</a>
+        </div>
 
       </section>
     </div>
