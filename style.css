@@ -430,7 +430,7 @@ input[type="search"]::-webkit-search-cancel-button {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--purple-500);;
     transition: .4s;
     border-radius: 34px;
 }
@@ -448,7 +448,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 input:checked + .slider {
-    background-color: var(--purple-500);
+    background-color: var(--neutral-500);
 }
 
 input:checked + .slider:before {
@@ -467,4 +467,52 @@ input:checked + .slider:before {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Light Theme */
+.light-theme {
+    background: var(--neutral-0);
+}
+
+
+/* Header */
+body.light-theme .theme-selector-container svg {
+    color: var(--neutral-500);
+}
+
+body.light-theme .font-text {
+    color: var(--neutral-800);
+}
+
+body.light-theme #search-input {
+    background: var(--neutral-100);
+    color: var(--neutral-800);
+}
+
+/* Input */
+body.light-theme #search-input::placeholder {
+    color: var(--neutral-800);
+}
+
+/* Pronunciation */
+body.light-theme .word {
+    color: var(--neutral-800);
+}
+
+/* Part of Speech */
+body.light-theme .partOfSpeech {
+    color: var(--neutral-800);
+}
+
+body.light-theme .after-style::after {
+    background: var(--neutral-200);
+}
+
+body.light-theme .meaning li {
+    color: var(--neutral-800);
+}
+
+/* Source */
+body.light-theme .source-link {
+    color: var(--neutral-800);
 }
