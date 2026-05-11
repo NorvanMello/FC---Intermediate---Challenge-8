@@ -21,14 +21,22 @@
           <button 
             class="font-selector-container" 
             type="button" 
-            aria-label="Select font" 
+            aria-label="Select font"
+            aria-controls="font-menu"
             aria-expanded="false">
             <span class="font-text">Sans Serif</span>
             <img class="font-img" src="./assets/images/icon-arrow-down.svg" alt="" aria-hidden="true">
           </button>
 
-          <div class="theme-selector-container">
-            <label for="theme-logo">
+          <div class="popup" id="font-menu" aria-hidden="true">
+            <button type="button" class="pop-btn sans-serif">Sans Serif</button>
+            <button type="button" class="pop-btn serif">Serif</button>
+            <button type="button" class="pop-btn mono">Mono</button>
+          </div>
+
+          <div class="rectangle"></div> //Don't remove - required for visual layout
+
+          <label class="theme-selector-container" for="theme-logo">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               width="20" 
@@ -46,14 +54,14 @@
             />
             </svg>
 
-            <label class="switch">
+            <span class="switch">
               <input type="checkbox" id="theme-logo">
               <span class="slider"></span>
-            </label>
+            </span>
 
-            <label for="theme-logo" class="visually-hidden">
+            <span for="theme-logo" class="visually-hidden">
               Toggle dark theme
-            </label>
+            </span>
 
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -79,8 +87,7 @@
                 stroke-linecap="round"
               />
             </svg>
-            </label>
-          </div>
+          </label>
         </div>
       </header>
 
