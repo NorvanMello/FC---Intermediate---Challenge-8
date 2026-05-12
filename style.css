@@ -1,604 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+// Global
+const body = document.body;
 
+// Header
+const fontSelectorContainer = document.querySelector(".font-selector-container");
+const fontPopup = document.querySelector(".popup")
+const themeLogo = document.querySelector("#theme-logo");
 
-:root {
-    /* Neutral */
-    --neutral-950: #000000;
-    --neutral-900: #1f1f1f;
-    --neutral-800: #2d2d2d;
-    --neutral-700: #3a3a3a;
-    --neutral-500: #757575;
-    --neutral-200: #e9e9e9;
-    --neutral-100: #f4f4f4;
-    --neutral-0: #ffffff;
+const btnSansSerif = document.querySelector(".sans-serif")
+const btnSerif = document.querySelector(".serif")
+const btnMono = document.querySelector(".mono")
 
-    /* Purple */
-    --purple-600: #8f19e8;
-    --purple-500: #a445ed;
+const fontText = document.querySelector(".font-text")
 
-    /* Red */
-    --red-500: #ff5252;
-
-    /* Dark Theme */
-    --bg-primary-color-dark: var(--neutral-950);
-
-    /* Spacing */
-    --spacing-0: 0;
-    --spacing-100: 8px;
-    --spacing-125: 10px;
-    --spacing-150: 12px;
-    --spacing-200: 16px;
-    --spacing-250: 20px;
-    --spacing-300: 24px;
-    --spacing-325: 26px;
-    --spacing-400: 32px;
-    --spacing-500: 40px;
-    --spacing-600: 48px;
-
-    /* Radius */
-    --radius-0: 0;
-    --radius-10: 10px;
-    --radius-16: 16px;
-
-    /* Font Families */
-    --font-serif: "Lora", serif;
-    --font-sans: "Inter", sans-serif;
-    --font-mono: "Inconsolata", monospace;
-
-    /* Font Weights */
-    --fw-regular: 400;
-    --fw-bold: 700;
-
-    /* Font Sizes */
-    --fs-1: 64px;
-    --fs-2: 24px;
-    --fs-3: 20px;
-    --fs-4: 18px;
-    --fs-5: 16px;
-    --fs-6: 15px;
-    --fs-7: 14px;
-
-    /* Line Heights */
-    --lh-tight: 105%;
-    --lh-normal: 120%;
-    --lh-relaxed: 130%;
-    --lh-loose: 160%;
-    --lh-extra: 170%;
-
-    /* Letter Spacing */
-    --ls-normal: 0px;
-    --ls-tight: -0.25px;
-
-    /* Text Preset 1 */
-    --text-preset-1-serif-lora-bold: var(--fw-bold) var(--fs-1) / var(--lh-relaxed) var(--font-serif);
-    --text-preset-1-sans-inter-bold: var(--fw-bold) var(--fs-1) / var(--lh-normal) var(--font-sans);
-    --text-preset-1-mono-inconsolata-bold: var(--fw-bold) var(--fs-1) / var(--lh-tight) var(--font-mono);
-
-    /* Text Preset 2 */
-    --text-preset-2-serif-lora-bold-italic: italic var(--fw-bold) var(--fs-2) / var(--lh-normal) var(--font-serif);
-    --text-preset-2-sans-inter-bold-italic: italic var(--fw-bold) var(--fs-2) / var(--lh-normal) var(--font-sans);
-    --text-preset-2-sans-inter-regular: var(--fw-regular) var(--fs-2) / var(--lh-normal) var(--font-sans);
-    --text-preset-2-mono-inconsolata-bold: var(--fw-bold) var(--fs-2) / 104% var(--font-mono);
-
-    /* Text Preset 3 */
-    --text-preset-3-serif-lora-bold: var(--fw-bold) var(--fs-3) / var(--lh-relaxed) var(--font-serif);
-    --text-preset-3-serif-lora-regular: var(--fw-regular) var(--fs-3) / var(--lh-relaxed) var(--font-serif);
-    --text-preset-3-sans-inter-bold: var(--fw-bold) var(--fs-3) / var(--lh-normal) var(--font-sans);
-    --text-preset-3-sans-inter-regular: var(--fw-regular) var(--fs-3) / var(--lh-normal) var(--font-sans);
-    --text-preset-3-mono-inconsolata-bold: var(--fw-bold) var(--fs-3) / var(--lh-tight) var(--font-mono);
-    --text-preset-3-mono-inconsolata-regular: var(--fw-regular) var(--fs-3) / var(--lh-tight) var(--font-mono);
-
-    /* Text Preset 4 */
-    --text-preset-4-serif-lora-bold: var(--fw-bold) var(--fs-4) / 133% var(--font-serif);
-    --text-preset-4-serif-lora-regular: var(--fw-regular) var(--fs-4) / 133% var(--font-serif);
-    --text-preset-4-sans-inter-bold: var(--fw-bold) var(--fs-4) / 133% var(--font-sans);
-    --text-preset-4-sans-inter-regular: var(--fw-regular) var(--fs-4) / 133% var(--font-sans);
-    --text-preset-4-mono-inconsolata-bold: var(--fw-bold) var(--fs-4) / 133% var(--font-mono);
-    --text-preset-4-mono-inconsolata-regular: var(--fw-regular) var(--fs-4) / 133% var(--font-mono);
-
-    /* Text Preset 7 */
-    --text-preset-7-serif-lora-bold: var(--fw-bold) var(--fs-7) / var(--lh-extra) var(--font-serif);
-    --text-preset-7-serif-lora-regular: var(--fw-regular) var(--fs-7) / var(--lh-relaxed) var(--font-serif);
-    --text-preset-7-sans-inter-bold: var(--fw-bold) var(--fs-7) / var(--lh-extra) var(--font-sans);
-    --text-preset-7-sans-inter-regular: var(--fw-regular) var(--fs-7) / var(--lh-normal) var(--font-sans);
-    --text-preset-7-mono-inconsolata-bold: var(--fw-bold) var(--fs-7) / var(--lh-extra) var(--font-mono);
-    --text-preset-7-mono-inconsolata-regular: var(--fw-regular) var(--fs-7) / 107% var(--font-mono);
-
-    /* Text Preset Mobile 1 */
-    --text-preset-1-serif-lora-bold-mobile: var(--fw-bold) 32px / var(--lh-relaxed) var(--font-serif);
-    --text-preset-1-sans-inter-bold-mobile: var(--fw-bold) 32px / var(--lh-normal) var(--font-sans);
-    --text-preset-1-mono-inconsolata-bold-mobile: var(--fw-bold) 32px / 106% var(--font-mono);
-
-    /* Text Preset Mobile 4 */
-    --text-preset-4-serif-lora-bold-italic-mobile: italic var(--fw-bold) var(--fs-4) / 127% var(--font-serif);
-    --text-preset-4-sans-inter-bold-italic-mobile: italic var(--fw-bold) var(--fs-4) / 122% var(--font-sans);
-
-    /* Text Preset Mobile 5 */
-    --text-preset-5-serif-lora-bold: var(--fw-bold) var(--fs-5) / var(--lh-normal) var(--font-serif);
-    --text-preset-5-serif-lora-regular: var(--fw-regular) var(--fs-5) / var(--lh-normal) var(--font-serif);
-    --text-preset-5-sans-inter-bold: var(--fw-bold) var(--fs-5) / var(--lh-normal) var(--font-sans);
-    --text-preset-5-sans-inter-regular: var(--fw-regular) var(--fs-5) / var(--lh-normal) var(--font-sans);
-    --text-preset-5-mono-inconsolata-bold: var(--fw-bold) var(--fs-5) / 106% var(--font-mono);
-    --text-preset-5-mono-inconsolata-regular: var(--fw-regular) var(--fs-5) / 106% var(--font-mono);
-
-    /* Text Preset Mobile 6 */
-    --text-preset-6-serif-lora-regular: var(--fw-regular) var(--fs-6) / var(--lh-loose) var(--font-serif);
-    --text-preset-6-sans-inter-regular: var(--fw-regular) var(--fs-6) / var(--lh-loose) var(--font-sans);
-    --text-preset-6-mono-inconsolata-regular: var(--fw-regular) var(--fs-6) / var(--lh-loose) var(--font-mono);
+function applyThemeStyles() {
+    body.classList.toggle("light-theme")
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+function updatePopupState(isOpen) {
+    fontSelectorContainer.setAttribute("aria-expanded", String(isOpen))
+    fontPopup.setAttribute("aria-hidden", String(!isOpen));
 }
 
-body {
-    background: var(--bg-primary-color-dark);
+function closePopup() {
+    fontPopup.classList.remove("active")
 }
 
-.main-container {
-    margin: var(--spacing-300);
-}
+themeLogo.addEventListener("change", applyThemeStyles)
 
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
+// Button - Select Font
+fontSelectorContainer.addEventListener("click", () => {
+    fontPopup.classList.toggle("active");
 
-/* Header */
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    const isOpen = fontPopup.classList.contains("active")
 
-.logo {
-    max-height: 32px;
-    height: 100%;
-}
+    updatePopupState(isOpen)
+})
 
-.logo img {
-    width: 28px;
-}
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") {
+        fontPopup.classList.remove("active")
 
-/* Right Container */
-.right-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
+        updatePopupState(false);
+    }
+})
 
-    position: relative;
-}
+// Button Popup - Select Font
+btnSansSerif.addEventListener("click", () => {
+    body.classList.remove("serif")
+    body.classList.remove("mono")
 
-.font-selector-container {
-    background: none;
-    border: none;
+    fontText.textContent = "Sans Serif"
+    body.classList.add("sans-serif")
 
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.font-text {
-    font: var(--text-preset-7-serif-lora-bold);
-    color: var(--neutral-0);
-}
-
-.font-img {
-    width: 12px;
-    height: 6px;
-    color: red;
-}
-
-.rectangle {
-    width: 1px;
-    height: 32px;
-    background: var(--neutral-0);
-}
-
-/* Theme Selector Container */
-.theme-selector-container {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-125);
-}
-
-.theme-selector-container svg {
-    width: 20px;
-    height: 20px;
-    color: var(--purple-500);
-}
-
-/* Search Container (form) */
-
-.search-container {
-    position: relative;
-}
-
-#search-input {
-    background: var(--neutral-900);
-
-    font: var(--text-preset-5-mono-inconsolata-bold);
-    color: var(--neutral-0);
-
-    width: 100%;
-    height: 48px;
+    closePopup()
     
-    padding: 0 var(--spacing-300);
-    border-radius: var(--radius-16);
-    border: none;
-}
-/* Remove the native clear (x) button from search inputs (WebKit browsers) */
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
-}
+})
 
-#search-input::placeholder {
-    font: var(--text-preset-3-sans-inter-bold);
-    color: var(--neutral-0);
-    opacity: 25%;
-}
+btnSerif.addEventListener("click", () => {
+    body.classList.remove("sans-serif")
+    body.classList.remove("mono")
 
-.search-button {
-    position: absolute;
-    left: calc(100% - 30px);
-    top: 30%;
+    fontText.textContent = "Serif"
+    body.classList.add("serif")
 
-    background: none;
-    border: none;
+    closePopup()
+})
 
-    cursor: pointer;
-}
+btnMono.addEventListener("click", () => {
+    body.classList.remove("sans-serif")
+    body.classList.remove("serif")
 
-/* Word & Pronunciation */
-.pronunciation-container {
-    display: flex;
-    justify-content: space-between;
-}
+    fontText.textContent = "Mono"
+    body.classList.add("mono")
 
-.word-pronunciation-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-100);
-}
-
-.word {
-    font: var(--text-preset-1-mono-inconsolata-bold-mobile);
-    color: var(--neutral-0);
-}
-
-.pronunciation {
-    font: var(--text-preset-4-sans-inter-regular);
-    color: var(--purple-500);
-}
-
-.pronunciation-button {
-    background: none;
-    border: none;
-}
-
-.pronunciation-img {
-    width: var(--spacing-600);
-    height: var(--spacing-600);
-}
-
-/* Part of Speech & Meaning */
-.noun-section {
-
-}
-
-/* Meaning & Synonyms*/
-
-.meaning {
-    margin-top: var(--spacing-300);
-    padding-left: 0.8rem;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-150);
-}
-
-.meaning li {
-    font: var(--text-preset-6-mono-inconsolata-regular);
-    color: var(--neutral-0);
-    padding-left: var(--spacing-250);
-  
-}
-
-.meaning li::marker {
-    color: var(--purple-500);
-  
-}
-
-/* .meaning li {
-    font: var(--text-preset-6-mono-inconsolata-regular);
-    color: var(--neutral-0);
-    list-style: none;
-
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-}
-
-.meaning li::before {
-    content: "\2022";
-    color: var(--purple-500);
-    font-weight: bold;
-    
-    flex-shrink: 0;
-} */
-
-.synonyms-container {
-    margin-top: var(--spacing-300);
-    display: flex;
-    gap: var(--spacing-300);
-}
-
-.synonyms-text {
-    font: var(--text-preset-5-mono-inconsolata-bold);
-    color: var(--purple-500);
-}
-
-.synonyms {
-    font: var(--text-preset-5-mono-inconsolata-regular);
-    color: var(--neutral-500);
-}
-
-/* Verb */
-.verb-section {
-
-}
-
-.example-container {
-    font: var(--text-preset-6-mono-inconsolata-regular);
-    color: var(--neutral-500);
-}
-
-.source-link {
-    text-decoration: none;
-
-    font: var(--text-preset-7-mono-inconsolata-regular);
-    color: var(--neutral-0);
-}
-
-.source-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-100);
-}
-
-.source-text {
-    text-decoration: underline;
-}
-
-/* Classes - After, Meaning, List*/
-
-.partOfSpeech-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.after-style::after {
-    content: "";
-    display: block;
-    width: 100%;
-    background-color: var(--neutral-700);
-    height: 1px;
-    /* flex: 1; */
-}
-
-.partOfSpeech {
-    font: var(--text-preset-4-mono-inconsolata-bold);
-    color: var(--neutral-0);
-}
-
-.meaning-synonyms-container,
-.source-container,
-.verb-container,
-.verb-container.after-style::after {
-    margin-top: var(--spacing-400);
-}
-
-.meaning-text,
-.source-text {
-    font: var(--text-preset-5-mono-inconsolata-regular);
-    color: var(--neutral-500);
-}
-
-/* Toggle Switch */
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--purple-500);;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 4px;
-    bottom: 3px;
-    background-color: var(--neutral-0);
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--neutral-500);
-}
-
-input:checked + .slider:before {
-    transform: translateX(18px);
-}
-
-/* Button - Font Selector */
-.popup {
-    background: var(--neutral-900);
-    box-shadow: 0 0 30px 0 var(--purple-500);
-
-    min-width: 122px;
-
-    padding: var(--spacing-300) var(--spacing-200);
-    margin-top: var(--spacing-125);
-    border-radius: var(--radius-16);
-
-    position: absolute;
-    top: 50%;
-    transform: translate(-20%, 10%);
-    z-index: 999;
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-200);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transition:
-    opacity 0.25s ease,
-    transform 0.25s ease,
-    visibility 0.25s ease;
-}
-
-.popup.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translate(-20%, 10%);
-}
-
-.pop-btn {
-    font: var(--text-preset-7-mono-inconsolata-bold);
-    color: var(--neutral-0);
-
-    text-align: start;
-    
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.pop-btn:hover,
-.pop-btn:focus-visible {
-  color: var(--purple-500);
-}
-
-.pop-btn.mono {
-    font: var(--text-preset-4-mono-inconsolata-bold);
-}
-
-/* Font */
-.mono {
-    font-family: var(--font-mono);
-}
-
-.serif {
-    font-family: var(--font-serif);
-}
-
-.sans-serif {
-    font-family: var(--font-sans);
-}
-
-/* Hide Elements */
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Display none */
-
-.hidden {
-    display: none;
-}
-
-/* Light Theme */
-.light-theme {
-    background: var(--neutral-0);
-}
-
-/* Header */
-body.light-theme .theme-selector-container svg {
-    color: var(--neutral-500);
-}
-
-body.light-theme .font-text {
-    color: var(--neutral-800);
-}
-
-body.light-theme .popup {
-    background: var(--neutral-0);
-    box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
-}
-
-body.light-theme .pop-btn {
-    color: var(--neutral-800);
-}
-
-body.light-theme #search-input {
-    background: var(--neutral-100);
-    color: var(--neutral-800);
-}
-
-/* Input */
-body.light-theme #search-input::placeholder {
-    color: var(--neutral-800);
-}
-
-/* Pronunciation */
-body.light-theme .word {
-    color: var(--neutral-800);
-}
-
-/* Part of Speech */
-body.light-theme .partOfSpeech {
-    color: var(--neutral-800);
-}
-
-body.light-theme .after-style::after {
-    background: var(--neutral-200);
-}
-
-body.light-theme .meaning li {
-    color: var(--neutral-800);
-}
-
-/* Source */
-body.light-theme .source-link {
-    color: var(--neutral-800);
-}
+    closePopup()
+})
