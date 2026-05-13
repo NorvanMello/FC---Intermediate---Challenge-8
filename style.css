@@ -338,6 +338,13 @@ input[type="search"]::-webkit-search-cancel-button {
 .pronunciation-button {
     background: none;
     border: none;
+
+    cursor: pointer;
+}
+
+.pronunciation-button:active {
+    transform: scale(0.90);
+    transition: transform 0.2s ease;
 }
 
 .pronunciation-img {
