@@ -115,6 +115,7 @@ async function getWord(word) {
 function renderPronunciationSection(wordArray) {
     wordText.textContent = `${wordArray.word}`
     pronunciation.textContent = `${wordArray.phonetic}`
+    pronunciationPlay.classList.remove("hidden")
 }
 
 function playAudio() {
@@ -136,48 +137,49 @@ function getAudioUrl(phonetics) {
     return "";
 }
 
-function renderPartOfSpeech(wordData) {
-    partOfSpeech.innerHTML = "";
+//Meaning, Synonyms & Source
+function renderMeaningSection(wordData) {
+    const meaningItems = wordData.definitions
+    .map(def => `<li>${def.definition} <p  class="example-container">${def.example ? def.example : ""}</p></li>`)
+    .join("");
 
-    for(let i = 0; i < wordData.meanings.length; i++) {
-        if(wordData.meanings[i]) {
-            const meaningItems = wordData.meanings[i].definitions
-            .map(def => `<li>${def.definition} <p  class="example-container">${def.example ? def.example : ""}</p></li>`)
-            .join("");
+    partOfSpeech.innerHTML += `
+        <div class="partOfSpeech-container after-style">
+            <h2 class="partOfSpeech">
+                ${wordData.partOfSpeech}
+            </h2>
+        </div>
 
-            const synonyms = wordData.meanings[i].synonyms
-            .map(synonym => `${synonym ? synonym : ""}`)
-            .join(" ")
+        <div class="meaning-synonyms-container">
+            <h3 class="meaning-text">
+            Meaning
+            </h3>
+                <ul class="meaning">
+                    ${meaningItems}
+                </ul>
+        </div>
+    `
+}
 
-            partOfSpeech.innerHTML += `
-                <div class="partOfSpeech-container after-style">
-                    <h2 class="partOfSpeech">
-                        ${wordData.meanings[i].partOfSpeech}
-                    </h2>
-                </div>
+function renderSynonyms(wordData) {
+    const synonyms = wordData.synonyms
+    .map(synonym => `${synonym ? synonym : ""}`)
+    .join(" ")
 
-                <div class="meaning-synonyms-container">
-                    <h3 class="meaning-text">
-                    Meaning
-                    </h3>
-                        <ul class="meaning">
-                            ${meaningItems}
-                        </ul>
-                </div>
+    partOfSpeech.innerHTML += `
+        <div class="synonyms-container">
+            <h3 class="synonyms-text">
+            Synonyms
+            </h3>
 
-                <div class="synonyms-container">
-                    <h3 class="synonyms-text">
-                    Synonyms
-                    </h3>
+            <span class="synonyms">
+                ${synonyms}
+            </span>
+        </div>
+    ` 
+}
 
-                    <span class="synonyms">
-                        ${synonyms}
-                    </span>
-                </div>
-            `
-        }
-    }
-
+function renderSource(wordData) {
     partOfSpeech.innerHTML += `
         <div class="source-container">
             <h3 class="source-text">
@@ -193,12 +195,32 @@ function renderPartOfSpeech(wordData) {
             </a>
         </div>
     ` 
+}
+
+function renderPartOfSpeech(wordData) {
+    partOfSpeech.innerHTML = "";
+
+    for(let i = 0; i < wordData.meanings.length; i++) {
+        if(wordData.meanings[i]) {
+        
+            renderMeaningSection(wordData.meanings[i]);
+            
+            renderSynonyms(wordData.meanings[i]);
+        }
+    }
     
+    renderSource(wordData);
 }
 
 // Logic
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    if(!searchInput.value) {
+        console.log("Can't be empty...")
+
+        return;
+    }
 
     const wordArray = await getWord(searchInput.value)
     const wordData = wordArray[0]
@@ -207,12 +229,11 @@ form.addEventListener("submit", async (event) => {
 
     pronunciationPlay.dataset.audio = audioUrl;
 
+    //Pronunciation
     renderPronunciationSection(wordData);
 
+    //Part Of Speech
     renderPartOfSpeech(wordData);
 })
 
 pronunciationPlay.addEventListener("click", playAudio);
-
-//Part of speech
-
