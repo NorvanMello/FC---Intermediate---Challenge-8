@@ -21,6 +21,9 @@ const wordText = document.querySelector(".word")
 const pronunciation = document.querySelector(".pronunciation")
 const pronunciationPlay = document.querySelector(".pronunciation-button")
 
+//part Of Speech
+const partOfSpeech = document.querySelector(".partOfSpeech-section")
+
 // Functions
 function applyThemeStyles() {
     body.classList.toggle("light-theme")
@@ -108,6 +111,7 @@ async function getWord(word) {
     return data;
 }
 
+//Functions
 function renderPronunciationSection(wordArray) {
     wordText.textContent = `${wordArray.word}`
     pronunciation.textContent = `${wordArray.phonetic}`
@@ -132,6 +136,66 @@ function getAudioUrl(phonetics) {
     return "";
 }
 
+function renderPartOfSpeech(wordData) {
+    partOfSpeech.innerHTML = "";
+
+    for(let i = 0; i < wordData.meanings.length; i++) {
+        if(wordData.meanings[i]) {
+            const meaningItems = wordData.meanings[i].definitions
+            .map(def => `<li>${def.definition} <p  class="example-container">${def.example ? def.example : ""}</p></li>`)
+            .join("");
+
+            const synonyms = wordData.meanings[i].synonyms
+            .map(synonym => `${synonym ? synonym : ""}`)
+            .join(" ")
+
+            partOfSpeech.innerHTML += `
+                <div class="partOfSpeech-container after-style">
+                    <h2 class="partOfSpeech">
+                        ${wordData.meanings[i].partOfSpeech}
+                    </h2>
+                </div>
+
+                <div class="meaning-synonyms-container">
+                    <h3 class="meaning-text">
+                    Meaning
+                    </h3>
+                        <ul class="meaning">
+                            ${meaningItems}
+                        </ul>
+                </div>
+
+                <div class="synonyms-container">
+                    <h3 class="synonyms-text">
+                    Synonyms
+                    </h3>
+
+                    <span class="synonyms">
+                        ${synonyms}
+                    </span>
+                </div>
+            `
+        }
+    }
+
+    partOfSpeech.innerHTML += `
+        <div class="source-container">
+            <h3 class="source-text">
+                Source
+            </h3>
+
+            <a href="${wordData.sourceUrls[0]}"  
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View source on Wiktionary"
+                class="source-link">
+                ${wordData.sourceUrls[0]}
+            </a>
+        </div>
+    ` 
+    
+}
+
 // Logic
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -143,8 +207,12 @@ form.addEventListener("submit", async (event) => {
 
     pronunciationPlay.dataset.audio = audioUrl;
 
-    renderPronunciationSection(wordData)
+    renderPronunciationSection(wordData);
+
+    renderPartOfSpeech(wordData);
 })
 
-pronunciationPlay.addEventListener("click", playAudio)
+pronunciationPlay.addEventListener("click", playAudio);
+
+//Part of speech
 
