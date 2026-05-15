@@ -1,6 +1,12 @@
 // Global
 const body = document.body;
 
+//Main
+const mainContainer = document.querySelector(".main-container")
+
+//Error
+const errorContainer = document.querySelector(".error-container")
+
 // Header
 const fontSelectorContainer = document.querySelector(".font-selector-container");
 const fontPopup = document.querySelector(".popup")
@@ -15,8 +21,10 @@ const fontText = document.querySelector(".font-text")
 //Search Container
 const form = document.querySelector(".search-container")
 const searchInput = document.querySelector("#search-input")
+const textError = document.querySelector(".error-text")
 
 // Pronunciation Container
+const pronunciationContainer = document.querySelector(".pronunciation-container")
 const wordText = document.querySelector(".word")
 const pronunciation = document.querySelector(".pronunciation")
 const pronunciationPlay = document.querySelector(".pronunciation-button")
@@ -35,7 +43,8 @@ function updatePopupState(isOpen) {
 }
 
 function closePopup() {
-    fontPopup.classList.remove("active")
+    fontSelectorContainer.focus();
+    fontPopup.classList.remove("active");
     updatePopupState(false);
 }
 
@@ -212,28 +221,58 @@ function renderPartOfSpeech(wordData) {
     renderSource(wordData);
 }
 
+function error(add) {
+    if(add) {
+        textError.classList.remove("hidden")
+        pronunciationContainer.classList.add("hidden")
+        partOfSpeech.classList.add("hidden")
+    } else {
+        textError.classList.add("hidden")
+        pronunciationContainer.classList.remove("hidden")
+        partOfSpeech.classList.remove("hidden")
+    }
+    
+}
+
+function wordNotFound(isTrue) {
+    if(isTrue) {
+        pronunciationContainer.classList.add("hidden")
+        partOfSpeech.classList.add("hidden")
+        errorContainer.classList.remove("hidden")
+    } else {
+        pronunciationContainer.classList.remove("hidden")
+        partOfSpeech.classList.remove("hidden")
+        errorContainer.classList.add("hidden")
+    }
+}
+
 // Logic
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    error(false)
+    wordNotFound(false)
 
     if(!searchInput.value) {
-        console.log("Can't be empty...")
-
+        error(true)
         return;
     }
+    try {
+        const wordArray = await getWord(searchInput.value)
+         const wordData = wordArray[0]
 
-    const wordArray = await getWord(searchInput.value)
-    const wordData = wordArray[0]
+        const audioUrl = getAudioUrl(wordData.phonetics)
 
-    const audioUrl = getAudioUrl(wordData.phonetics)
+        pronunciationPlay.dataset.audio = audioUrl;
+        //Pronunciation
+        renderPronunciationSection(wordData);
 
-    pronunciationPlay.dataset.audio = audioUrl;
-
-    //Pronunciation
-    renderPronunciationSection(wordData);
-
-    //Part Of Speech
-    renderPartOfSpeech(wordData);
+        //Part Of Speech
+        renderPartOfSpeech(wordData);
+    } catch (error) {
+        wordNotFound(true)
+    }
+    
 })
 
 pronunciationPlay.addEventListener("click", playAudio);
+
