@@ -195,6 +195,7 @@ body {
     justify-content: space-between;
 }
 
+
 .logo {
     max-height: 32px;
     height: 100%;
@@ -632,6 +633,51 @@ body.mono {
   --current-font: var(--font-mono);
 }
 
+/* Error */
+
+.error-container {
+    margin-top: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-250);
+}
+
+.message svg {
+    margin-bottom: var(--spacing-600);
+}
+
+.message p {
+    font-weight: var(--fw-bold);
+    font-size: var(--text-preset-3-size);
+    line-height: var(--text-preset-3-line-height-normal);
+    font-family: var(--current-font);
+    color: var(--neutral-0);
+}
+
+.error-message-sorry {
+    font-weight: var(--fw-regular);
+    font-size: var(--text-preset-3-size);
+    line-height: var(--text-preset-3-line-height-normal);
+    font-family: var(--current-font);
+    color: var(--neutral-500);
+
+    text-align: center;
+}
+
+.error-text {
+    font-weight: var(--fw-regular);
+    font-size: var(--text-preset-4-size);
+    line-height: var(--text-preset-4-line-height-default);
+    font-family: var(--current-font);
+    color: var(--red-500);
+
+    margin-top: var(--spacing-100);
+
+    position: absolute;
+}
+
 /* Hide Elements */
 
 .visually-hidden {
@@ -705,5 +751,10 @@ body.light-theme .meaning li {
 
 /* Source */
 body.light-theme .source-link {
+    color: var(--neutral-800);
+}
+
+/* error */
+body.light-theme .message p {
     color: var(--neutral-800);
 }
