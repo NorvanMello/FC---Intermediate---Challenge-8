@@ -123,7 +123,7 @@ async function getWord(word) {
 //Functions
 function renderPronunciationSection(wordArray) {
     wordText.textContent = `${wordArray.word}`
-    pronunciation.textContent = `${wordArray.phonetic}`
+    pronunciation.textContent = `${wordArray.phonetic ? wordArray.phonetic : ""}`
     pronunciationPlay.classList.remove("hidden")
 }
 
