@@ -279,4 +279,3 @@ form.addEventListener("submit", async (event) => {
 })
 
 pronunciationPlay.addEventListener("click", playAudio);
-
