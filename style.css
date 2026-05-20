@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
-
 :root {
     /* Neutral */
     --neutral-950: #000000;
@@ -152,7 +151,6 @@
 
     --text-preset-6-line-height-loose: var(--lh-loose);
 
-
     /* ========================================
     TEXT PRESET 7
     ======================================== */
@@ -194,7 +192,6 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-
 
 .logo {
     max-height: 32px;
@@ -354,9 +351,6 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* Part of Speech & Meaning */
-.noun-section {
-
-}
 
 /* Meaning & Synonyms*/
 
@@ -381,7 +375,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .meaning li::marker {
     color: var(--purple-500);
-  
 }
 
 /* .meaning li {
@@ -425,9 +418,6 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* Verb */
-.verb-section {
-
-}
 
 .example-container {    
     font-weight: var(--text-preset-6-weight-regular);
