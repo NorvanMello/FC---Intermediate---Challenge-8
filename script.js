@@ -122,9 +122,13 @@ async function getWord(word) {
 
 //Functions
 function renderPronunciationSection(wordArray) {
+    pronunciationPlay.classList.add("hidden")
+
     wordText.textContent = `${wordArray.word}`
     pronunciation.textContent = `${wordArray.phonetic ? wordArray.phonetic : ""}`
-    pronunciationPlay.classList.remove("hidden")
+    if(pronunciationPlay.dataset.audio){
+        pronunciationPlay.classList.remove("hidden")    
+    }
 }
 
 function playAudio() {
@@ -137,7 +141,7 @@ function playAudio() {
 }
 
 function getAudioUrl(phonetics) {
-    for(phonetic of phonetics) {
+    for(const phonetic of phonetics) {
         if(phonetic.audio) {
             return phonetic.audio
         }
