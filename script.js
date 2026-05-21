@@ -66,13 +66,16 @@ if(themeLogo) {
 
 
 // Button - Select Font
-fontSelectorContainer.addEventListener("click", () => {
+if(fontSelectorContainer) {
+    fontSelectorContainer.addEventListener("click", () => {
     fontPopup.classList.toggle("active");
 
     const isOpen = fontPopup.classList.contains("active")
 
     updatePopupState(isOpen)
 })
+}
+
 
 document.addEventListener("keydown", (e) => {
     if(e.key === "Escape") {
@@ -81,35 +84,41 @@ document.addEventListener("keydown", (e) => {
 })
 
 // Button Popup - Select Font
-btnSansSerif.addEventListener("click", () => {
-    changeFont({
-        text: "Sans Serif", 
-        textElement: fontText,
-        classToAdd: "sans-serif", 
-        classToRemove: ["serif", "mono"], 
-        element: body
+if(btnSansSerif) {
+    btnSansSerif.addEventListener("click", () => {
+        changeFont({
+            text: "Sans Serif", 
+            textElement: fontText,
+            classToAdd: "sans-serif", 
+            classToRemove: ["serif", "mono"], 
+            element: body
+        })
     })
-})
+}
 
-btnSerif.addEventListener("click", () => {
-    changeFont({
-        text: "Serif", 
-        textElement: fontText,
-        classToAdd: "serif", 
-        classToRemove: ["sans-serif", "mono"], 
-        element: body
+if(btnSerif) {
+    btnSerif.addEventListener("click", () => {
+        changeFont({
+            text: "Serif", 
+            textElement: fontText,
+            classToAdd: "serif", 
+            classToRemove: ["sans-serif", "mono"], 
+            element: body
+        })
     })
-})
+}
 
-btnMono.addEventListener("click", () => {
-    changeFont({
-        text: "Mono",
-        textElement: fontText,
-        classToAdd: "mono", 
-        classToRemove: ["serif", "sans-serif"], 
-        element: body
+if(btnMono) {
+    btnMono.addEventListener("click", () => {
+        changeFont({
+            text: "Mono",
+            textElement: fontText,
+            classToAdd: "mono", 
+            classToRemove: ["serif", "sans-serif"], 
+            element: body
+        })
     })
-})
+}
 
 // API
 async function getWord(word) {
@@ -199,10 +208,10 @@ function renderMeaningSection(wordData) {
 
 function renderSynonyms(wordData) {
 
-    const partContainer = document.createElement("div")
-    partContainer.classList.add("synonyms-container")
-
     if(wordData.synonyms?.length > 0) {
+        const partContainer = document.createElement("div")
+        partContainer.classList.add("synonyms-container")
+
         const synonymsTitle = document.createElement("h3")
         synonymsTitle.classList.add("synonyms-text")
         synonymsTitle.textContent = "Synonyms";
@@ -214,16 +223,13 @@ function renderSynonyms(wordData) {
         
         spanSynonyms.textContent = wordData.synonyms.join(" ")
         partContainer.appendChild(spanSynonyms);
-    }
-    
-    partOfSpeech.appendChild(partContainer);
 
-    // wordData.synonyms.forEach(syn => {
-    //     spanSynonyms.appendChild(syn).join(" ")
-    // })
+        partOfSpeech.appendChild(partContainer);
+    }
 }
 
 function renderSource(wordData) {
+
     const sourceContainer = document.createElement("div");
     sourceContainer.classList.add("source-container");
 
@@ -242,7 +248,9 @@ function renderSource(wordData) {
 
     sourceLink.textContent = wordData.sourceUrls[0];
 
-    partOfSpeech.appendChild(sourceLink);
+    sourceContainer.appendChild(sourceLink);
+
+    partOfSpeech.appendChild(sourceContainer);
 }
 
 function renderPartOfSpeech(wordData) {
@@ -286,32 +294,34 @@ function wordNotFound(isTrue) {
 }
 
 // Logic
-form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    error(false)
-    wordNotFound(false)
 
-    if(!searchInput.value) {
-        error(true)
-        return;
-    }
-    try {
-        const wordArray = await getWord(searchInput.value)
-         const wordData = wordArray[0]
+if(form) {
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        error(false)
+        wordNotFound(false)
 
-        const audioUrl = getAudioUrl(wordData.phonetics)
+        if(!searchInput.value) {
+            error(true)
+            return;
+        }
+        try {
+            const wordArray = await getWord(searchInput.value)
+            const wordData = wordArray[0]
 
-        pronunciationPlay.dataset.audio = audioUrl;
-        //Pronunciation
-        renderPronunciationSection(wordData);
+            const audioUrl = getAudioUrl(wordData.phonetics)
 
-        //Part Of Speech
-        renderPartOfSpeech(wordData);
-    } catch (error) {
-        wordNotFound(true)
-    }
-    
-})
+            pronunciationPlay.dataset.audio = audioUrl;
+            //Pronunciation
+            renderPronunciationSection(wordData);
 
-pronunciationPlay.addEventListener("click", playAudio);
+            //Part Of Speech
+            renderPartOfSpeech(wordData);
+        } catch (error) {
+            wordNotFound(true)
+        }
+    })
+
+    pronunciationPlay.addEventListener("click", playAudio);
+}
 
