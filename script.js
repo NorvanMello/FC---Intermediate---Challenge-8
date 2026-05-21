@@ -295,6 +295,8 @@ function wordNotFound(isTrue) {
 
 // Logic
 
+pronunciationPlay?.addEventListener("click", playAudio);
+
 if(form) {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -312,7 +314,7 @@ if(form) {
             const audioUrl = getAudioUrl(wordData.phonetics)
             
             pronunciationPlay?.dataset.audio = audioUrl;
-            pronunciationPlay?.addEventListener("click", playAudio);
+            
             //Pronunciation
             renderPronunciationSection(wordData);
 
