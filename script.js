@@ -322,6 +322,8 @@ if(form) {
         }
     })
 
-    pronunciationPlay.addEventListener("click", playAudio);
+        if(pronunciationPlay) {
+        pronunciationPlay.addEventListener("click", playAudio);
+    }
 }
 
