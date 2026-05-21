@@ -60,7 +60,10 @@ function changeFont({text, textElement, classToAdd, classToRemove, element}) {
 }
 
 // Code
-themeLogo.addEventListener("change", applyThemeStyles)
+if(themeLogo) {
+    themeLogo.addEventListener("change", applyThemeStyles)
+}
+
 
 // Button - Select Font
 fontSelectorContainer.addEventListener("click", () => {
@@ -152,44 +155,72 @@ function getAudioUrl(phonetics) {
 
 //Meaning, Synonyms & Source
 function renderMeaningSection(wordData) {
-    const meaningItems = wordData.definitions
-    .map(def => `<li>${def.definition} <p  class="example-container">${def.example ? def.example : ""}</p></li>`)
-    .join("");
 
-    partOfSpeech.innerHTML += `
-        <div class="partOfSpeech-container after-style">
-            <h2 class="partOfSpeech">
-                ${wordData.partOfSpeech}
-            </h2>
-        </div>
+    const partContainer = document.createElement("div");
+    partContainer.classList.add("partOfSpeech-container", "after-style");
 
-        <div class="meaning-synonyms-container">
-            <h3 class="meaning-text">
-            Meaning
-            </h3>
-                <ul class="meaning">
-                    ${meaningItems}
-                </ul>
-        </div>
-    `
+    const partTitle = document.createElement("h2");
+    partTitle.classList.add("partOfSpeech");
+    partTitle.textContent = wordData.partOfSpeech;
+
+    partContainer.appendChild(partTitle);
+
+    const meaningContainer = document.createElement("div");
+    meaningContainer.classList.add("meaning-synonyms-container");
+
+    const meaningTitle = document.createElement("h3");
+    meaningTitle.classList.add("meaning-text");
+    meaningTitle.textContent = "Meaning";
+
+    const ul = document.createElement("ul");
+    ul.classList.add("meaning");
+
+    wordData.definitions.forEach(def => {
+        const li = document.createElement("li");
+        li.textContent = def.definition;
+
+        if(def.example) {
+            const example = document.createElement("p");
+            example.classList.add("example-container");
+            example.textContent = def.example;
+
+            li.appendChild(example);
+        }
+
+        ul.appendChild(li);
+    });
+
+    meaningContainer.appendChild(meaningTitle);
+    meaningContainer.appendChild(ul);
+
+    partOfSpeech.appendChild(partContainer);
+    partOfSpeech.appendChild(meaningContainer);
 }
 
 function renderSynonyms(wordData) {
-    const synonyms = wordData.synonyms
-    .map(synonym => `${synonym ? synonym : ""}`)
-    .join(" ")
 
-    partOfSpeech.innerHTML += `
-        <div class="synonyms-container">
-            <h3 class="synonyms-text">
-            Synonyms
-            </h3>
+    const partContainer = document.createElement("div")
+    partContainer.classList.add("synonyms-container")
 
-            <span class="synonyms">
-                ${synonyms}
-            </span>
-        </div>
-    ` 
+    if(wordData.synonyms?.length > 0) {
+        const synonymsTitle = document.createElement("h3")
+        synonymsTitle.classList.add("synonyms-text")
+        synonymsTitle.textContent = "Synonyms";
+
+        partContainer.appendChild(synonymsTitle)
+
+        const spanSynonyms = document.createElement("span")
+        spanSynonyms.classList.add("synonyms")
+        
+        spanSynonyms.textContent = wordData.synonyms.join(" ")
+        partContainer.appendChild(spanSynonyms);
+    }
+    
+    partOfSpeech.appendChild(partContainer);
+
+    // wordData.synonyms.forEach(syn => {
+    //     spanSynonyms.appendChild(syn).join(" ")
+    // })
 }
 
 function renderSource(wordData) {
@@ -279,3 +310,4 @@ form.addEventListener("submit", async (event) => {
 })
 
 pronunciationPlay.addEventListener("click", playAudio);
+
