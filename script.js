@@ -310,8 +310,9 @@ if(form) {
             const wordData = wordArray[0]
 
             const audioUrl = getAudioUrl(wordData.phonetics)
-
-            pronunciationPlay.dataset.audio = audioUrl;
+            if(pronunciationPlay) {
+                pronunciationPlay.dataset.audio = audioUrl;
+            }
             //Pronunciation
             renderPronunciationSection(wordData);
 
@@ -321,9 +322,6 @@ if(form) {
             wordNotFound(true)
         }
     })
-
-        if(pronunciationPlay) {
         pronunciationPlay.addEventListener("click", playAudio);
-    }
 }
 
