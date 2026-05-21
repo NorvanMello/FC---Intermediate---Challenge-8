@@ -268,7 +268,7 @@ function renderPartOfSpeech(wordData) {
     renderSource(wordData);
 }
 
-function error(add) {
+function blankSpace(add) {
     if(add) {
         textError.classList.remove("hidden")
         pronunciationContainer.classList.add("hidden")
@@ -300,11 +300,11 @@ pronunciationPlay?.addEventListener("click", playAudio);
 if(form) {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        error(false)
+        blankSpace(false)
         wordNotFound(false)
 
         if(!searchInput.value) {
-            error(true)
+            blankSpace(true)
             return;
         }
         try {
