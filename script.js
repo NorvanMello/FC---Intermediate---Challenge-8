@@ -224,21 +224,25 @@ function renderSynonyms(wordData) {
 }
 
 function renderSource(wordData) {
-    partOfSpeech.innerHTML += `
-        <div class="source-container">
-            <h3 class="source-text">
-                Source
-            </h3>
+    const sourceContainer = document.createElement("div");
+    sourceContainer.classList.add("source-container");
 
-            <a href="${wordData.sourceUrls[0]}"  
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View source on Wiktionary"
-                class="source-link">
-                ${wordData.sourceUrls[0]}
-            </a>
-        </div>
-    ` 
+    const sourceTitle = document.createElement("h3");
+    sourceTitle.classList.add("source-text");
+    sourceTitle.textContent = "Source";
+
+    sourceContainer.appendChild(sourceTitle);
+
+    const sourceLink = document.createElement("a");
+    sourceLink.href = wordData.sourceUrls[0];
+    sourceLink.target = "_blank";
+    sourceLink.rel = "noopener noreferrer";
+    sourceLink.setAttribute("aria-label", "View source on Wiktionary");
+    sourceLink.classList.add("source-link");
+
+    sourceLink.textContent = wordData.sourceUrls[0];
+
+    partOfSpeech.appendChild(sourceLink);
 }
 
 function renderPartOfSpeech(wordData) {
