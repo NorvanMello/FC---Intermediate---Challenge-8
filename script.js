@@ -64,7 +64,6 @@ if(themeLogo) {
     themeLogo.addEventListener("change", applyThemeStyles)
 }
 
-
 // Button - Select Font
 if(fontSelectorContainer) {
     fontSelectorContainer.addEventListener("click", () => {
@@ -75,7 +74,6 @@ if(fontSelectorContainer) {
     updatePopupState(isOpen)
 })
 }
-
 
 document.addEventListener("keydown", (e) => {
     if(e.key === "Escape") {
@@ -204,6 +202,7 @@ function renderMeaningSection(wordData) {
 
     partOfSpeech.appendChild(partContainer);
     partOfSpeech.appendChild(meaningContainer);
+
 }
 
 function renderSynonyms(wordData) {
@@ -271,10 +270,13 @@ function renderPartOfSpeech(wordData) {
 function blankSpace(add) {
     if(add) {
         textError.classList.remove("hidden")
+        searchInput.setAttribute("aria-invalid", "true")
+        searchInput.focus()
         pronunciationContainer.classList.add("hidden")
         partOfSpeech.classList.add("hidden")
     } else {
         textError.classList.add("hidden")
+        searchInput.removeAttribute("aria-invalid")
         pronunciationContainer.classList.remove("hidden")
         partOfSpeech.classList.remove("hidden")
     }
@@ -294,7 +296,6 @@ function wordNotFound(isTrue) {
 }
 
 // Logic
-
 pronunciationPlay?.addEventListener("click", playAudio);
 
 if(form) {
@@ -312,9 +313,9 @@ if(form) {
             const wordData = wordArray[0]
 
             const audioUrl = getAudioUrl(wordData.phonetics)
-            
+
             pronunciationPlay?.dataset.audio = audioUrl;
-            
+
             //Pronunciation
             renderPronunciationSection(wordData);
 
