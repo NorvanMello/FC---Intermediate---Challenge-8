@@ -95,9 +95,9 @@
         <label class="visually-hidden" for="search-input">
           Search for a word.
         </label>
-        <input type="search" id="search-input" placeholder="Search for any word...">
+        <input type="search" id="search-input" placeholder="Search for any word..." aria-describedby="search-error">
 
-        <p class="error-text hidden">Whoops, can't be empty...</p>
+        <p class="error-text hidden" id="search-error" aria-live="polite">Whoops, can't be empty...</p>
 
         <button type="submit" class="search-button" aria-label="Search for a word">
           <img src="./assets/images/icon-search.svg" alt="" class="search-img" aria-hidden="true">
